@@ -13,8 +13,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    archivedelegate.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    archivedelegate.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    quickpoll.qrc
+
+OTHER_FILES += \
+    quickpoll.conf
