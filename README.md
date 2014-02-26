@@ -9,7 +9,7 @@ Requirements
 
 - Web server with PHP
 
-- Wifi local lan with IPv4 class-C addresses dhcp (ip is used to identify each user) -> max 254 users
+- Wifi local lan with IPv4 class-C addresses dhcp (ip is used to identify each user) -> max 253 users
 
 - Qt to compile project
 
