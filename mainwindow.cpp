@@ -1,3 +1,21 @@
+//This file is part of Quickpoll.
+
+//Author: Mauro Alessandro (www.maetech.it) (c) march 2014
+
+//Quickpoll is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//Foobar is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QSettings>
@@ -34,8 +52,8 @@ MainWindow::MainWindow(QWidget *parent) :
 //        _debug(QString("Settings: loading ") + SETTINGS_FILENAME);
 //    }
 
-    this->serverPath=settings.value("QuickPoll/web-server-path").toString();
-    this->votesPath=settings.value("QuickPoll/vote-files-path").toString();
+    this->indexPath=settings.value("QuickPoll/index-php-path").toString();
+    this->votesPath=settings.value("QuickPoll/vote-folder-path").toString();
     this->voteFileDir = new QDir(this->votesPath);
 //    if (!this->voteFileDir->exists()) qDebug()<<"error";
 
@@ -155,9 +173,9 @@ void MainWindow::on_pollName_textChanged(const QString &arg1)
 
 void MainWindow::createfile(bool enablePoll)
 {
-    QFile::remove(this->serverPath+"/index.php");
-    QFile file(this->serverPath+"/index.php");
-    qDebug()<<"fopen"<<file.open(QIODevice::WriteOnly);
+    //QFile::remove(this->serverPath+"/index.php");
+    QFile file(this->indexPath);
+    qDebug()<<"fopen"<<file.open(QIODevice::ReadWrite|QIODevice::Truncate);
     if (enablePoll) {
 
         file.write(this->phpVote);
