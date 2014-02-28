@@ -1,6 +1,0 @@
-[QuickPoll]
-index-php-path="/var/www/index.php"
-vote-folder-path="/var/www/votes"
-vote-php-path="/var/www/o/vote.php"
-novote-php-path="/var/www/o/novote.php"
-display-html-path="/var/www/o/display.html"
