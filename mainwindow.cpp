@@ -292,12 +292,12 @@ bool MainWindow::saveFile()
         QTextStream output(&f);
         for (int i=0; i<this->archive->rowCount();i++)
         {
-            for (int j=0; j<5;j++)
+            for (int j=0; j<6;j++)
             {
                 if (j==0) output<<'"';
                 output<<archive->data(archive->index(i,j)).toString();
                 if (j==0) output<<'"';
-                if (j<4) output<<",";
+                if (j<5) output<<",";
             }
             output<<"\n";
         }
