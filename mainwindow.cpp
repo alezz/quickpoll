@@ -238,7 +238,7 @@ bool MainWindow::createfile(bool enablePoll)
     if (file.open(QIODevice::ReadWrite|QIODevice::Truncate)) {
         if (enablePoll) {
             QByteArray tmp(this->phpVote);
-            QByteArray n( ui->pollName->text().toAscii());
+            QByteArray n( ui->pollName->text().toLocal8Bit());
             tmp.replace("%pollname%",n);
             file.write(tmp);
         }else{
