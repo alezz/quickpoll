@@ -7,13 +7,13 @@
 //the Free Software Foundation, either version 3 of the License, or
 //(at your option) any later version.
 
-//Foobar is distributed in the hope that it will be useful,
+//QuickPoll is distributed in the hope that it will be useful,
 //but WITHOUT ANY WARRANTY; without even the implied warranty of
 //MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //GNU General Public License for more details.
 
 //You should have received a copy of the GNU General Public License
-//along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+//along with QuickPoll.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include "archivedelegate.h"
@@ -32,7 +32,9 @@ QSize	archiveDelegate::sizeHint ( const QStyleOptionViewItem & option, const QMo
 void archiveDelegate::paint ( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const
 {
 
-    if (index.column()==2) painter->fillRect(option.rect,QColor(255,255,180));
+    if (index.column()==1) painter->fillRect(option.rect,QColor(180,255,255));
+    if (index.column()==2) painter->fillRect(option.rect,QColor(180,255,180));
+    if (index.column()==3) painter->fillRect(option.rect,QColor(255,255,180));
     painter->drawText(option.rect,index.model()->data(index).toString(),QTextOption(Qt::AlignCenter));
 
 }

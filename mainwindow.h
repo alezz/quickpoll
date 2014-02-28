@@ -7,13 +7,13 @@
 //the Free Software Foundation, either version 3 of the License, or
 //(at your option) any later version.
 
-//Foobar is distributed in the hope that it will be useful,
+//QuickPoll is distributed in the hope that it will be useful,
 //but WITHOUT ANY WARRANTY; without even the implied warranty of
 //MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //GNU General Public License for more details.
 
 //You should have received a copy of the GNU General Public License
-//along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+//along with QuickPoll.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
@@ -26,6 +26,10 @@
 #include <QFile>
 #include <QStandardItemModel>
 #include "archivedelegate.h"
+#include "dialog.h"
+#include "results.h"
+#include "about.h"
+#include <QCloseEvent>
 
 namespace Ui {
 class MainWindow;
@@ -37,7 +41,10 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    bool setup();
     ~MainWindow();
+
+
 
 private slots:
     void tick();
@@ -59,14 +66,20 @@ private slots:
 
     bool saveFile();
 
+    void closeEvent(QCloseEvent *event);
+
+    void clearall();
+
 private:
+
+
     Ui::MainWindow *ui;
     QTimer *timer;
     int count,mt;
     QString indexPath, votesPath;
     QDir *voteFileDir;
 
-    void createfile(bool enablePoll);
+    bool createfile(bool enablePoll);
 
     QString start_timestamp;
 
@@ -75,6 +88,10 @@ private:
     QByteArray phpVote, phpNovote;
 
     archiveDelegate * arch_itemdelegate;
+
+    Results * dResults;
+    Dialog * dSign;
+    About * dAbout;
 };
 
 #endif // MAINWINDOW_H

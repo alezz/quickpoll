@@ -2,15 +2,14 @@
     <qresource prefix="/icons">
         <file alias="cross">icons/cross-script.png</file>
         <file alias="save">icons/disk.png</file>
-        <file alias="new">icons/document.png</file>
-        <file alias="up">icons/thumb-up.png</file>
-        <file alias="down">icons/thumb.png</file>
-        <file alias="tick">icons/tick.png</file>
-        <file alias="green">icons/traffic-light-green.png</file>
-        <file alias="red">icons/traffic-light-red.png</file>
+        <file alias="eye">icons/eye.png</file>
+        <file alias="green">icons/status.png</file>
+        <file alias="red">icons/status-busy.png</file>
+        <file alias="minus">icons/minus.png</file>
+        <file alias="question">icons/question-small-white.png</file>
     </qresource>
-    <qresource prefix="/php">
-        <file alias="vote">php/vote.php</file>
-        <file alias="novote">php/novote.php</file>
+    <qresource prefix="/text">
+        <file alias="readme">README.md</file>
+        <file alias="license">COPYING</file>
     </qresource>
 </RCC>

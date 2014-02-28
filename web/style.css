@@ -1,0 +1,93 @@
+body {
+	background: #f0f;
+	font-family: Verdana;
+}
+
+.code {
+	display: none;
+	background: #fff;
+}
+
+#error {
+	background: #fff;
+	color: #f00;
+	border: solid 4px red;
+}
+
+img.logo {
+	width: 100%;
+	border: none;
+
+}
+
+input[type='radio'] {
+	position:absolute;
+	clip: rect(1px,1px,1px,1px);
+	
+}
+
+input[type='radio']+label img{
+/*	width: 100px;
+	height: 100px;
+	background: url('images/p1.png') left center no-repeat;*/
+	width: 30%;
+	cursor: pointer;
+	margin:0;
+	border: none;
+/*	padding:375px 0px 0px 400px;*/
+}
+
+input[type='radio']:checked + label img {
+	border: solid black 4px;
+	border-radius: 6px;
+}
+
+input[type='submit'] {
+	position: absolute;
+	clip: rect(1px,1px,1px,1px);
+}
+input[type='submit']+label img{
+	width: 30%;
+	cursor: pointer;
+	margin: 0;
+	border: none;
+}
+
+/*gia votato*/
+/*.already {	
+
+}*/
+
+.novote, .already, .voted {	/*votazione fatta */
+	margin: 20px 0 10px 0;
+	padding: 0;
+	font-size: 22px;
+	color: #fff;
+}
+
+h2 {		/*stai votando per*/
+	margin: 5px 0 0 0;
+	padding: 0;
+
+}
+
+h1 {		/*pollname*/
+	margin: 0;
+	padding: 0;
+
+}
+
+#reload {
+	clear: both;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+#reload a {
+	background: #fff;
+}
+
+#about {
+	margin-top: 100px;
+}
+
