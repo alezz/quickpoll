@@ -254,7 +254,7 @@ bool MainWindow::createfile(bool enablePoll)
 void MainWindow::cleartable()
 {
     this->archive->clear();
-    this->archive->setHorizontalHeaderLabels(QStringList()<<"nome"<<"votanti"<<"punti tot"<<"media pt."<<"ora inizio votazioni"<<"ora fine votazioni");
+    this->archive->setHorizontalHeaderLabels(QStringList()<<"nome concorrente"<<"n. votanti"<<"punti tot"<<"media pt."<<"data/ora inizio voti"<<"data/ora fine voti");
     ui->tableArchive->setColumnWidth(0,150);
     ui->tableArchive->setColumnWidth(1,90);
     ui->tableArchive->setColumnWidth(2,90);
@@ -290,13 +290,14 @@ bool MainWindow::saveFile()
 //    }
     if (f.open(QIODevice::ReadWrite|QIODevice::Truncate|QIODevice::Text)) {
         QTextStream output(&f);
-        for (int i=0; i<this->archive->rowCount();i++)
+        for (int i=-1; i<this->archive->rowCount();i++)
         {
             for (int j=0; j<6;j++)
             {
-                if (j==0) output<<'"';
-                output<<archive->data(archive->index(i,j)).toString();
-                if (j==0) output<<'"';
+                if ((i==-1)||(j==0)) output<<'"';
+                if (i==-1) output<<archive->horizontalHeaderItem(j)->text();
+                else output<<archive->data(archive->index(i,j)).toString();
+                if ((i==-1)||(j==0)) output<<'"';
                 if (j<5) output<<",";
             }
             output<<"\n";
