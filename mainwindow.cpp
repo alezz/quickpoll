@@ -184,6 +184,7 @@ void MainWindow::on_btnGo_clicked()
     ui->editMaxTimeSeconds->setEnabled(false);
     mt=ui->editMaxTimeSeconds->value();
     ui->lblAveragePoints->setText("0");
+    ui->pollName->setEnabled(false);
 
     //timer start
     timer->start(POLL_FREQ);
@@ -207,6 +208,7 @@ void MainWindow::on_btnStop_clicked()
     ui->btnClear->setEnabled(true);
     ui->btnSave->setEnabled(true);
     ui->editMaxTimeSeconds->setEnabled(true);
+    ui->pollName->setEnabled(true);
 
     //stop timer
     timer->stop();
