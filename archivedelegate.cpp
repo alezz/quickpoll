@@ -31,10 +31,13 @@ QSize	archiveDelegate::sizeHint ( const QStyleOptionViewItem & option, const QMo
 
 void archiveDelegate::paint ( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const
 {
+    QRect r=option.rect;
+    if (index.column()==1) painter->fillRect(r,QColor(180,255,255));
+    if (index.column()==2) painter->fillRect(r,QColor(180,255,180));
+    if (index.column()==3) painter->fillRect(r,QColor(255,255,180));
+    if (option.state & QStyle::State_Selected)
+        painter->fillRect(r, QColor(128,180,255));
+    painter->drawText(r,index.model()->data(index).toString(),QTextOption(Qt::AlignCenter));
 
-    if (index.column()==1) painter->fillRect(option.rect,QColor(180,255,255));
-    if (index.column()==2) painter->fillRect(option.rect,QColor(180,255,180));
-    if (index.column()==3) painter->fillRect(option.rect,QColor(255,255,180));
-    painter->drawText(option.rect,index.model()->data(index).toString(),QTextOption(Qt::AlignCenter));
 
 }

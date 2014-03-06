@@ -25,6 +25,7 @@
 #include <QFileDialog>
 #include <cmath>
 #include <QTextStream>
+#include <QTextDocument>
 
 #define SETTINGS_FILENAME "quickpoll.conf"
 #define POLL_FREQ 500
@@ -128,10 +129,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 
-    //cancella le dialog
-    delete this->dSign;
-    delete this->dAbout;
-    delete this->dResults;
+//    //cancella le dialog
+//    delete this->dSign;
+//    delete this->dAbout;
+//    delete this->dResults;
 
     //cancella tutti i file
     QFile::remove(this->indexPath);
@@ -145,9 +146,15 @@ void MainWindow::tick()
         //conto alla rovescia
         count--;
         ui->editMaxTimeSeconds->setValue((count*POLL_FREQ)/1000);
+        this->dSign->count(  ui->editMaxTimeSeconds->value() );
         if (count==0) on_btnStop_clicked();
+        else poll();
     }
-
+    else
+        poll();
+}
+void MainWindow::poll()
+{
     //poll
     int conta=0, punti=0;
     this->voteFileDir->refresh();
@@ -162,7 +169,7 @@ void MainWindow::tick()
     ui->lblTotalPolls->setText(QString("%1").arg(conta));
     ui->lblTotalPoints->setText(QString("%1").arg(punti));
     if (conta>0)
-        ui->lblAveragePoints->setText(QString("%1").arg(round((float)punti/conta)));
+        ui->lblAveragePoints->setText(QString("%1").arg(round(((float)punti/conta)*10)/10.0));
 }
 
 void MainWindow::on_btnGo_clicked()
@@ -176,6 +183,7 @@ void MainWindow::on_btnGo_clicked()
     ui->btnSave->setEnabled(false);
     ui->editMaxTimeSeconds->setEnabled(false);
     mt=ui->editMaxTimeSeconds->value();
+    ui->lblAveragePoints->setText("0");
 
     //timer start
     timer->start(POLL_FREQ);
@@ -185,11 +193,13 @@ void MainWindow::on_btnGo_clicked()
     createfile(true);
 
     //display
-    this->dSign->display(ui->pollName->text(),true,false);
+    this->dSign->display(ui->pollName->text().trimmed().toUpper(),true,false);
 }
 
 void MainWindow::on_btnStop_clicked()
 {
+    poll(); //un'ultimo conteggio valà :)
+
     ui->checkMaxTimeEnable->setEnabled(true);
     ui->btnGo->setEnabled(true);
     ui->btnStop->setEnabled(false);
@@ -207,7 +217,7 @@ void MainWindow::on_btnStop_clicked()
     createfile(false);
 
     //salva il polling
-    this->archive->appendRow(QList<QStandardItem*>() << new QStandardItem(ui->pollName->text())<< new QStandardItem(ui->lblTotalPolls->text())
+    this->archive->appendRow(QList<QStandardItem*>() << new QStandardItem(ui->pollName->text().trimmed().toUpper())<< new QStandardItem(ui->lblTotalPolls->text())
                              <<new QStandardItem(ui->lblTotalPoints->text())<<new QStandardItem(ui->lblAveragePoints->text())
                              <<new QStandardItem(this->start_timestamp)<<new QStandardItem(QDateTime::currentDateTime().toString(DATETIME_FORMAT)) );
 
@@ -218,15 +228,19 @@ void MainWindow::on_btnStop_clicked()
     clearall();
 
     //display
-    this->dSign->display(ui->pollName->text(),false,true);
+
+    this->dSign->display(ui->pollName->text().trimmed().toUpper(),false,true);
 }
 
 void MainWindow::on_pollName_textChanged(const QString &arg1)
 {
-    if (!arg1.isEmpty()) {
+    QString text=arg1.trimmed().toUpper();
+    if (!text.isEmpty()) {
         ui->btnGo->setEnabled(true);
         //display
-        this->dSign->display(arg1,false,false);
+        this->dSign->display(text,false,false);
+        //counters
+        clearcounters();
     }else{
         ui->btnGo->setEnabled(false);
     }
@@ -238,7 +252,8 @@ bool MainWindow::createfile(bool enablePoll)
     if (file.open(QIODevice::ReadWrite|QIODevice::Truncate)) {
         if (enablePoll) {
             QByteArray tmp(this->phpVote);
-            QByteArray n( ui->pollName->text().toLocal8Bit());
+            QString ns=ui->pollName->text().trimmed().toUpper().toHtmlEscaped();
+            QByteArray n(ns.toLocal8Bit() );
             tmp.replace("%pollname%",n);
             file.write(tmp);
         }else{
@@ -357,4 +372,11 @@ void MainWindow::clearall()
     for(int i = 0; i < votes.count(); i++)
         QFile::remove(this->votesPath + "/"+ votes.at(i));
 
+}
+
+void MainWindow::clearcounters()
+{
+    ui->lblAveragePoints->setText("");
+    ui->lblTotalPoints->setText("");
+    ui->lblTotalPolls->setText("");
 }

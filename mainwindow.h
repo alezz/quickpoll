@@ -70,6 +70,10 @@ private slots:
 
     void clearall();
 
+    void clearcounters();
+
+    void poll();
+
 private:
 
 

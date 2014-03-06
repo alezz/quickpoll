@@ -17,8 +17,8 @@ public:
 
 public slots:
     void hideEvent(QHideEvent *);
-    void display(QString pollname, bool going, bool finished);
-
+    void display(QString pollname, bool going, bool finished, int count=-1);
+    void count(int count);  //conto alla rovescia
 
 signals:
     void hidden(bool);
@@ -26,6 +26,7 @@ signals:
 private:
     Ui::Dialog *ui;
     QString html;
+    QString name;
 
 };
 

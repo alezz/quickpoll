@@ -78,7 +78,7 @@
    <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>QuickPoll</string>
+   <string>Stato Votazione</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>

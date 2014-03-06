@@ -64,7 +64,7 @@ function error(){
 }
 
 function giavotato(){
-	?> <div class="already">Hai gi&agrave; votato per %pollname%</div> <?php
+	?> <div class="already">Hai gi&agrave; votato per %pollname%</div> <?
 }
 
 function form(){
@@ -81,7 +81,7 @@ function form(){
 <br/><br />
 <input type="submit" id="ok" value="OK"><label for="ok"><img src="images/ok.png" /></label><br />
 </form>
-<?php
+<?
 }
 
 	$path = "./votes/";
@@ -110,16 +110,16 @@ if (file_exists($file)){
 	if ($voto == "" ) {
 		form();
 	} else {
-		?><div class="code"><?php
+		?><div class="code"><?
 		$fp=fopen($file,'x');
 		if ($fp===false) {
 			error();
 		} else {
 			fwrite($fp,$voto); 
 			fclose($fp); 
-			?> </div><div class="voted">hai votato <?php echo $voto; ?> per %pollname%<?php
+			?> </div><div class="voted">hai votato <? echo $voto; ?> per %pollname%<?
 		}
-		?></div><?php
+		?></div><?
 	}
 } ?>
 

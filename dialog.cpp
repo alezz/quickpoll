@@ -19,14 +19,26 @@ void Dialog::hideEvent(QHideEvent *)
     emit hidden(false);
 }
 
-void Dialog::display(QString pollname, bool going, bool finished)
+void Dialog::display(QString pollname, bool going, bool finished, int count)
 {
-    QString htt(this->html), ht2;
+    if (count==-1) this->name=pollname;
+    QString htt(this->html), ht2, message;
     if (finished)
-        ht2=htt.replace("%polling%","Le votazioni sono chiuse!");
+        message = QString("Le votazioni sono chiuse!");
     else if (going)
-        ht2=(htt.replace("%polling%",QString("Votazioni aperte per: %1").arg(pollname)));
+    {
+        message=QString("Votazioni aperte per: %1").arg(pollname.toHtmlEscaped());
+        if (count>-1) message.append(QString("<br /><small>Mancano ancora %1 secondi!</small>").arg(count));
+    }
     else
-        ht2=(htt.replace("%polling%",QString("Fra poco si vota per: %1").arg(pollname)));
+        message=QString("Fra poco si vota per: %1").arg(pollname.toHtmlEscaped());
+    ht2=htt.replace("%polling%",message);
     ui->label->setText(ht2);
+}
+
+
+void Dialog::count(int count)
+{
+    //si verifica sempre quando sono con le votazioni avviate e non finite
+    display(this->name,true,false,count);
 }

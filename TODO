@@ -1,18 +1,18 @@
-- riga intestazione nel file csv
+//- riga intestazione nel file csv
 - pulsante ricarica / migliorare grafica
 - grafica tabella pubblico
-- evidenziatura riga tableview (non si vede in window)
+//- evidenziatura riga tableview (non si vede in windows)
 - pensare per eventuale protezione a pw
 - DNS?? <-> no due sottoreti
-- <?php (!!)
-- sort colonne tabella pubblico (media)
-- nomi maiuscoli
-- check nome vuoto (strip spazi)
-- azzera lblAverage sullo start
-- rename dialog (Stato Votazione / Risultati)
+//- <?php (!!)
+//- sort colonne tabella pubblico (media)
+//- nomi maiuscoli
+//- check nome vuoto (strip spazi)
+//- azzera lblAverage sullo start
+//- rename dialog (Stato Votazione / Risultati)
 
 
-- visualizzazione voto medio con una cifra decimale
+//- visualizzazione voto medio con una cifra decimale
 - aggiungere pulsante di reset contatori
 - (tipo voto/sondaggio)
 - sostituire pulsante ricarica con vota/...
