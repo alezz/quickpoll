@@ -19,6 +19,8 @@ The web server must be installed in addition to the app to get the system work.
 
 Requirements:
 
+- Php script that makes the game (not included in this repository - contact me)
+
 - Web server with PHP support
 
 - Wifi local lan with IPv4 class-C addresses dhcp (ip is used to identify each user) -> max 253 users
